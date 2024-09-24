@@ -20,6 +20,13 @@ import androidx.compose.ui.unit.sp
 import com.example.test.ui.theme.TestTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Button
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 
@@ -33,10 +40,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GreetingImage(
+                   /* GreetingImage(
                         message = "Happy Birthday sonia!",
-                        from = "From Emma"
-                    )
+                        from = "From Angie"
+                    )*/
+                    DiceWithButtonAndImage()
 
                 }
             }
@@ -51,10 +59,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun BirthdayCardPreview() {
     TestTheme {
-        GreetingImage(
-            message = "Happy Birthday sonia!",
-            from = "From Emma"
-        )
+       // GreetingImage(message = "Happy Birthday sonia!", from = "From Angie")
+        DiceWithButtonAndImage()
+         //GreetingCartes(texte = "")
     }
 }
 
@@ -100,15 +107,7 @@ fun GreetingImage(message: String, from: String,modifier:Modifier=Modifier) {
 }
 
 
-@Preview(showBackground = true, name = "ARTICLE")
-@Composable
-fun articlePreview() {
-    TestTheme {
 
-        GreetingCartes(texte = "")
-    }
-
-}
 
 @Composable
 fun GreetingArticle(sms: String,  modif:Modifier=Modifier) {
@@ -172,7 +171,7 @@ fun GreetingCartes(texte: String,  modif:Modifier=Modifier) {
     Column(modif.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
         Image(
             painter = image,
-            painter = im,
+
             contentDescription = null
 
         )
@@ -202,5 +201,40 @@ fun GreetingCartes(texte: String,  modif:Modifier=Modifier) {
 
 
         )
+    }
+}
+
+
+
+@Composable
+fun DiceRollerApp() {
+    DiceWithButtonAndImage()
+}
+
+@Composable
+fun DiceWithButtonAndImage(modifier: Modifier = Modifier) {
+    var result by remember { mutableStateOf(1) }
+    val imageResource = when (result) {
+        1 -> R.drawable.dice_1
+        2 -> R.drawable.dice_2
+        3 -> R.drawable.dice_3
+        4 -> R.drawable.dice_4
+        5 -> R.drawable.dice_5
+        else -> R.drawable.dice_6
+    }
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+
+    ) {
+        Image(
+            painter = painterResource(imageResource),
+            contentDescription = result.toString()
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = { result = (1..6).random() }) {
+            Text(stringResource(R.string.roll))
+
+        }
     }
 }
