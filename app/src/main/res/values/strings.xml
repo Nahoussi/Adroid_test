@@ -3,4 +3,19 @@
     <string name="article_content">In this tutorial, you build a simple UI component with declarative functions. You call Compose functions to say what elements you want and the Compose compiler does the rest. Compose is built around Composable functions. These functions let you define your app\\\'s UI programmatically because they let you describe how it should look and provide data dependencies, rather than focus on the process of the UI\\\'s construction, such as initializing an element and then attaching it to a parent. To create a Composable function, you add the @Composable annotation to the function name.</string>
     <string name="articl_content2">Jetpack Compose is a modern toolkit for building native Android UI. Compose simplifies and accelerates UI development on Android with less code, powerful tools, and intuitive Kotlin APIs.</string>
     <string name="roll">Roll</string>
+    <string name="ap_name">Tip Time</string>
+    <string name="calculate_tip">Calculate Tip</string>
+    <string name="bill_amount">Bill Amount</string>
+    <string name="how_was_the_service">Tip Percentage</string>
+    <string name="round_up_tip">Round up tip?</string>
+    <string name="tip_amount">Tip Amount: %s</string>
+    <string name="auteur">AUTEUR: Leonard de Vinci </string>
+    <string name="histoire">La Joconde ou Mona Lisa est un des portraits les plus emblématiques de l’histoire de la peinture. Peint par Léonard de Vinci au XVIe siècle,
+        il entra dans les collections de la cour de France pour enfin faire partie des œuvres exposées au Musée du Louvre.  </string>
+    <string name="retour">RETOUR</string>
+    <string name="suivant">SUIVANT</string>
+    <string name="acteur">GUY</string>
+    <string name="hist">portraits les plus emblématiques de l’histoire de la peinture.</string>
+    <string name="artiste">ESSAMBA</string>
+    <string name="hist3">France pour enfin faire partie des œuvres exposées au Musée du Louvre.</string>
 </resources>
