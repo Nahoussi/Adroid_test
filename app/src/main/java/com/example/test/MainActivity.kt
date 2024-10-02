@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.test.ui.theme.TestTheme
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -32,9 +33,11 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Switch
@@ -45,7 +48,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import java.text.NumberFormat
@@ -66,8 +75,8 @@ class MainActivity : ComponentActivity() {
                     )
                     DiceWithButtonAndImage()
                     TipTimeLayout()*/
-                    GreetingGallerie()
-
+                   GreetingGallerie()
+                   // ArtSpace()
                 }
             }
         }
@@ -89,7 +98,7 @@ fun BirthdayCardPreview() {
          //GreetingCartes(texte = "")
         //TipTimeLayout()
         GreetingGallerie()
-
+        //ArtSpace()
     }
 }
 
@@ -412,23 +421,34 @@ private fun calculateTip(amount: Double, tipPercent: Double = 15.0, roundUp: Boo
 fun GreetingGallerie(  modif:Modifier=Modifier) {
     //val image = painterResource(R.drawable.mona_lisa)
     var result by remember { mutableStateOf(1) }
+    val nextImage: () -> Unit = {
+        result = if (result > 2) 1 else result + 1
+    }
+
+    val previousImage: () -> Unit = {
+        result = if (result < 1) 2 else result - 1
+    }
+
+
+
+
     val imageResource = when (result) {
         1 -> R.drawable.mona_lisa
         2 -> R.drawable.oeuvres
 
         else -> R.drawable.oeuvres2
     }
-    Column(modif.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(modif.fillMaxSize().padding(top = 150.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Image(
             painter = painterResource(imageResource),
-            contentDescription = result.toString()
+            contentDescription = toString(),
+
         )
         when (result){
             1 -> println(
                 Column {
                     Text(
                         text = "MONA LISA",
-                        textAlign = TextAlign.Center,
                         fontSize = 24.sp,
                         modifier = Modifier.padding(16.dp)
 
@@ -436,7 +456,7 @@ fun GreetingGallerie(  modif:Modifier=Modifier) {
                     )
                     Text(
                         text = stringResource(R.string.auteur),
-                        textAlign = TextAlign.Justify,
+
                         modifier = Modifier.padding(16.dp)
 
                     )
@@ -503,13 +523,16 @@ fun GreetingGallerie(  modif:Modifier=Modifier) {
 
         Row (modifier = Modifier.padding(30.dp)
         ){
-            Button(onClick = {result = (1..3).random() }) {
-                Text(stringResource(R.string.retour))
+            Button(onClick = {  previousImage()},
+
+                ) {
+                Text(text = stringResource(R.string.retour),
+                )
             }
             Spacer(modifier = Modifier.width(50.dp))
-            Button(onClick = {result = (1..3).random() }) {
-                Text(stringResource(R.string.suivant))
-
+            Button(onClick = { nextImage() },
+                ) {
+                Text(text = stringResource(R.string.suivant))
             }
         }
 
